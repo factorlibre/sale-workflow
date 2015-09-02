@@ -3,7 +3,6 @@ Sale Stock on order lines
 ==========================
 
 This module adds the information of the product stock (On hand and forecast) into the Sale order lines.
-Also adds a button in the sale order to update this information and show the update values in the lines.
 
 Credits
 =======

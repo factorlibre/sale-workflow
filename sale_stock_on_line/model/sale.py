@@ -18,19 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import api, models, fields
-
-
-class SaleOrder(models.Model):
-    _inherit = 'sale.order'
-
-    @api.multi
-    def update_stock_information(self):
-        for line in self.order_line:
-            line.write({
-                'qty_available': line.product_id.qty_available,
-                'virtual_available': line.product_id.virtual_available
-            })
+from openerp import models, fields
 
 
 class SaleOrderLine(models.Model):
@@ -38,7 +26,7 @@ class SaleOrderLine(models.Model):
 
     qty_available = fields.Float(string='Quantity On Hand',
                                  related='product_id.qty_available',
-                                 store=True)
+                                 store=False)
     virtual_available = fields.Float(string='Forecast Quantity',
                                      related='product_id.virtual_available',
-                                     store=True)
+                                     store=False)

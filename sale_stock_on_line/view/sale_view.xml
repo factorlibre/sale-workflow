@@ -7,10 +7,6 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='order_line']" position="before">
-                    <button name="update_stock_information" type="object"
-                        string="Update Stock Information" states="draft,sent"/>
-                </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='product_uom_qty']"
                         position="before">
                     <field name="qty_available"/>
