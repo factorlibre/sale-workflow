@@ -18,15 +18,33 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     qty_available = fields.Float(string='Quantity On Hand',
-                                 related='product_id.qty_available',
+                                 compute='_get_available',
                                  store=False)
     virtual_available = fields.Float(string='Forecast Quantity',
-                                     related='product_id.virtual_available',
+                                     compute='_get_available',
                                      store=False)
+
+    @api.multi
+    def _get_available(self, field_names=None):
+        product_pool = self.env['product.product']
+        lines = self.browse(self.ids)
+
+        res = {line.id: line.product_id.id for line in lines}
+        products = product_pool.browse(res.values())
+
+        ctx = dict(self.env.context)
+        ctx['warehouse'] = self[0].order_id.warehouse_id.id
+        products_attrs = products.with_context(ctx)._product_available()
+
+        for line in lines:
+            attrs = products_attrs[res[line.id]]
+            line.qty_available = attrs['qty_available']
+            line.virtual_available = attrs['virtual_available']
+        return True
