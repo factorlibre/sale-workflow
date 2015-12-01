@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Hugo Santos
-#    Copyright 2015 FactorLibre
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2015 FactorLibre (<http://www.factorlibre.com>).
+#    @author Ismael Calvo <ismael.calvo@factorlibre.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -24,15 +25,12 @@ from openerp import models, fields, api
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    qty_available = fields.Float(string='Quantity On Hand',
-                                 compute='_get_available',
-                                 store=False)
-    virtual_available = fields.Float(string='Forecast Quantity',
-                                     compute='_get_available',
-                                     store=False)
+    real_qty_available = fields.Float(string='Available',
+                                      compute='_get_real_qty_available',
+                                      store=False)
 
     @api.multi
-    def _get_available(self, field_names=None):
+    def _get_real_qty_available(self, field_names=None):
         product_pool = self.env['product.product']
         lines = self.browse(self.ids)
 
@@ -45,6 +43,5 @@ class SaleOrderLine(models.Model):
 
         for line in lines:
             attrs = products_attrs[res[line.id]]
-            line.qty_available = attrs['qty_available']
-            line.virtual_available = attrs['virtual_available']
+            line.real_qty_available = attrs['real_qty_available']
         return True
