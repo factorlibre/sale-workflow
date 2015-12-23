@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2015 FactorLibre - Ismael Calvo <ismael.calvo@factorlibre.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+    <data>
+
+        <record id="sale_workflow_process_view_form" model="ir.ui.view">
+            <field name="name">sale_automic_workflow.sale_workflow_process.view_form</field>
+            <field name="model">sale.workflow.process</field>
+            <field name="inherit_id" ref="sale_automatic_workflow.sale_workflow_process_view_form"/>
+            <field name="arch" type="xml">
+                <field name="validate_order" position="after">
+                    <field name="manual_payment_validation"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="sale_workflow_process_view_tree" model="ir.ui.view">
+            <field name="name">sale_automic_workflow.sale_workflow_process.view_tree</field>
+            <field name="model">sale.workflow.process</field>
+            <field name="inherit_id" ref="sale_automatic_workflow.sale_workflow_process_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="validate_order" position="after">
+                    <field name="manual_payment_validation"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
