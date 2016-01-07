@@ -42,6 +42,7 @@ class SaleOrderLine(models.Model):
         products_attrs = products.with_context(ctx)._product_available()
 
         for line in lines:
-            attrs = products_attrs[res[line.id]]
-            line.real_qty_available = attrs['real_qty_available']
+            if res[line.id]:
+                attrs = products_attrs[res[line.id]]
+                line.real_qty_available = attrs['real_qty_available']
         return True
