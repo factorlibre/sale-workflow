@@ -1,4 +1,5 @@
 stock-logistics-workflow
 stock-logistics-transport
+stock-logistics-warehouse
 account-closing
 server-tools
