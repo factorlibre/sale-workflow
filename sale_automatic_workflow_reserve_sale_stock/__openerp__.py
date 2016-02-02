@@ -6,7 +6,7 @@
     'version': '8.0.0.1.0',
     'category': 'Generic Modules/Others',
     'license': 'AGPL-3',
-    'author': "FactorLibre,Camptocamp,Odoo Community Association (OCA)",
+    'author': "FactorLibre,Odoo Community Association (OCA)",
     'website': 'http://www.factorlibre.com/',
     'depends': [
         'sale_automatic_workflow',
