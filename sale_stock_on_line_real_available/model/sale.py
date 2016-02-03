@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api
+from openerp import api, fields, models
 
 
 class SaleOrderLine(models.Model):
@@ -29,20 +29,13 @@ class SaleOrderLine(models.Model):
                                       compute='_get_real_qty_available',
                                       store=False)
 
-    @api.multi
+    @api.depends('product_id', 'order_id.warehouse_id')
     def _get_real_qty_available(self, field_names=None):
-        product_pool = self.env['product.product']
-        lines = self.browse(self.ids)
-
-        res = {line.id: line.product_id.id for line in lines}
-        products = product_pool.browse(res.values())
-
-        ctx = dict(self.env.context)
-        ctx['warehouse'] = self[0].order_id.warehouse_id.id
-        products_attrs = products.with_context(ctx)._product_available()
-
-        for line in lines:
-            if res[line.id]:
-                attrs = products_attrs[res[line.id]]
-                line.real_qty_available = attrs['real_qty_available']
-        return True
+        for line in self:
+            if not line.product_id:
+                continue
+            product = line.product_id
+            ctx = dict(self.env.context)
+            ctx['warehouse'] = line.order_id.warehouse_id.id
+            line.real_qty_available = \
+                product.with_context(ctx).real_qty_available
