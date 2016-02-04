@@ -50,10 +50,10 @@ class AutomaticWorkflowJob(models.Model):
                         reserve_until.strftime(DEFAULT_SERVER_DATE_FORMAT)
                 if workflow_process.stock_reservation_location_id:
                     reservation_vals['location_id'] =\
-                        workflow_process.stock_reservation_location_id
+                        workflow_process.stock_reservation_location_id.id
                 if workflow_process.stock_reservation_location_dest_id:
                     reservation_vals['location_dest_id'] =\
-                        workflow_process.stock_reservation_location_id
+                        workflow_process.stock_reservation_location_id.id
                 sale_stock_reserve = sale_stock_reserve_env.with_context(ctx)\
                     .create(reservation_vals)
                 line_ids = [line.id for line in sale.order_line]
