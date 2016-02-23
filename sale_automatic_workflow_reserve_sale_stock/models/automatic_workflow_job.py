@@ -56,8 +56,14 @@ class AutomaticWorkflowJob(models.Model):
                         workflow_process.stock_reservation_location_id.id
                 sale_stock_reserve = sale_stock_reserve_env.with_context(ctx)\
                     .create(reservation_vals)
-                line_ids = [line.id for line in sale.order_line]
-                sale_stock_reserve.stock_reserve(line_ids)
+                line_ids = []
+                for line in sale.order_line:
+                    if not (
+                        line.product_id and line.product_id.product_tmpl_id and
+                            line.product_id.product_tmpl_id.bom_ids):
+                        line_ids.append(line.id)
+                if line_ids:
+                    sale_stock_reserve.stock_reserve(line_ids)
 
     @api.model
     def run(self):
