@@ -38,4 +38,5 @@ class SaleOrderLine(models.Model):
             ctx = dict(self.env.context)
             ctx['warehouse'] = line.order_id.warehouse_id.id
             line.real_qty_available = \
-                product.with_context(ctx).real_qty_available
+                product.with_context(ctx)._product_available()[product.id].get(
+                    'real_qty_available', 0.0)
