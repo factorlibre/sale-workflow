@@ -12,17 +12,22 @@
             <field name="arch" type="xml">
                 <xpath expr="//group[@string='Default Values']" position="after">
                     <group string="Surcharge included" name="surcharge">
-                        <field name="surcharge_included"/>
-                        <group attrs="{'invisible': [('surcharge_included', '=', False)]}">
-                            <label for="surcharge_amount"/>
-                            <div>
-                                <field name="surcharge_amount" class="oe_inline"
-                                    attrs="{'required': [('surcharge_included', '=', True)]}"/>
-                                <field name="surcharge_type" class="oe_inline"
-                                    attrs="{'required': [('surcharge_included', '=', True)]}"/>
-                            </div>
-                            <field name="surcharge_account"
-                                attrs="{'required': [('surcharge_included', '=', True)]}"/>
+                        <group string="Surcharge Options">
+                            <field name="surcharge_account"/>
+                            <field name="surcharge_lines" nolabel="1" colspan="4">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="payment_method" invisible="1"/>
+                                    <field name="amount"/>
+                                    <field name="surcharge_type"/>
+                                    <field name="min_amount"
+                                        attrs="{'readonly': [('surcharge_type', '!=', 'percentage')]}"/>
+                                    <field name="country_apply_type"/>
+                                    <field name="country"
+                                        attrs="{'readonly': [('country_apply_type', '=', False)],
+                                                'required': [('country_apply_type', '!=', False)]}"/>
+                                </tree>
+                            </field>
                         </group>
                     </group>
                 </xpath>

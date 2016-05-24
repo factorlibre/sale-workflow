@@ -15,20 +15,12 @@ class SaleOrder(models.Model):
             super(SaleOrder, self)._prepare_payment_move_lines(
                 move_name, journal, period, amount, date)
         method = self.payment_method_id
-        if method.surcharge_included:
-            charge_type = method.surcharge_type
-            charge_amount = method.surcharge_amount
+        res_amount, surcharge = method.get_surcharge(amount, self)
+        if surcharge > 0:
             surcharge_line = dict(credit_line)
             surcharge_line['account_id'] = method.surcharge_account.id
-            if charge_type == 'fixed':
-                credit_line['credit'] -= charge_amount
-                surcharge_line['credit'] = charge_amount
-            elif charge_type == 'percentage':
-                credit_line['credit'] = amount * (100 - charge_amount) / 100
-                surcharge_line['credit'] = amount * charge_amount / 100
-            else:
-                raise NotImplementedError
-            credit_line['credit']
+            surcharge_line['credit'] = surcharge
+            credit_line['credit'] = res_amount
             return debit_line, credit_line, surcharge_line
         else:
             return debit_line, credit_line
