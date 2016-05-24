@@ -17,14 +17,14 @@ class SaleOrder(models.Model):
         method = self.payment_method_id
         res_amount, surcharge = method.get_surcharge(amount, self)
         if surcharge > 0:
-            surcharge_line = dict(credit_line)
+            surcharge_line = dict(debit_line)
             if not method.surcharge_account:
                 raise exceptions.Warning(
                     "The surcharge account is not configured for the payment "
                     "method '{0}'".format(method.name))
             surcharge_line['account_id'] = method.surcharge_account.id
-            surcharge_line['credit'] = surcharge
-            credit_line['credit'] = res_amount
+            surcharge_line['debit'] = surcharge
+            debit_line['debit'] = res_amount
             return debit_line, credit_line, surcharge_line
         else:
             return debit_line, credit_line
