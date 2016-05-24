@@ -2,7 +2,7 @@
 # © 2016 FactorLibre - Ismael Calvo <ismael.calvo@factorlibre.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, models
+from openerp import api, exceptions, models
 
 
 class SaleOrder(models.Model):
@@ -18,6 +18,10 @@ class SaleOrder(models.Model):
         res_amount, surcharge = method.get_surcharge(amount, self)
         if surcharge > 0:
             surcharge_line = dict(credit_line)
+            if not method.surcharge_account:
+                raise exceptions.Warning(
+                    "The surcharge account is not configured for the payment "
+                    "method '{0}'".format(method.name))
             surcharge_line['account_id'] = method.surcharge_account.id
             surcharge_line['credit'] = surcharge
             credit_line['credit'] = res_amount
