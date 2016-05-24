@@ -25,6 +25,6 @@ class SaleOrder(models.Model):
             surcharge_line['account_id'] = method.surcharge_account.id
             surcharge_line['debit'] = surcharge
             debit_line['debit'] = res_amount
-            return debit_line, credit_line, surcharge_line
+            return surcharge_line, debit_line, credit_line
         else:
             return debit_line, credit_line
