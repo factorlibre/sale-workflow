@@ -20,6 +20,7 @@
         "sale_payment_method",
     ],
     "data": [
+        "security/ir.model.access.csv",
         "views/payment_method_view.xml",
     ],
     "demo": [],
