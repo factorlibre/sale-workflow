@@ -1,0 +1,56 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#   * sale_payment_method_multicurrency_journal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-07 10:40+0000\n"
+"PO-Revision-Date: 2016-07-07 12:44+0100\n"
+"Last-Translator: Ismael Calvo <ismael.calvo@factorlibre.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: sale_payment_method_multicurrency_journal
+#: field:payment.method.journal.line,currency:0
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: sale_payment_method_multicurrency_journal
+#: field:payment.method.journal.line,journal:0
+msgid "Journal"
+msgstr "Diario"
+
+#. module: sale_payment_method_multicurrency_journal
+#: field:payment.method.journal.line,method:0
+msgid "Method"
+msgstr "Método"
+
+#. module: sale_payment_method_multicurrency_journal
+#: field:payment.method,multicurrency_journals:0
+msgid "Multicurrency journals"
+msgstr "Diarios multimoneda"
+
+#. module: sale_payment_method_multicurrency_journal
+#: code:_description:0
+#: model:ir.model,name:sale_payment_method_multicurrency_journal.model_payment_method
+#, python-format
+msgid "Payment Method"
+msgstr "Método de pago"
+
+#. module: sale_payment_method_multicurrency_journal
+#: code:_description:0
+#: model:ir.model,name:sale_payment_method_multicurrency_journal.model_sale_order
+#, python-format
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: sale_payment_method_multicurrency_journal
+#: sql_constraint:payment.method.journal.line:0
+msgid "You can only set a journal for each currency."
+msgstr "Solo se puede establecer un diario para cada moneda."
