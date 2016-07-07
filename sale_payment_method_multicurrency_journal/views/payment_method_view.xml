@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 FactorLibre - Ismael Calvo <ismael.calvo@factorlibre.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+    <data>
+
+        <record id="payment_method_view_form" model="ir.ui.view">
+            <field name="name">sale_payment_method.payment_method.view_form</field>
+            <field name="model">payment.method</field>
+            <field name="inherit_id" ref="sale_payment_method.payment_method_view_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="multicurrency_journals"
+                        group="base.group_multi_currency">
+                        <tree editable="bottom">
+                            <field name="journal"/>
+                            <field name="currency"/>
+                        </tree>
+                    </field>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
