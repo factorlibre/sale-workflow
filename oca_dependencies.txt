@@ -2,4 +2,6 @@ stock-logistics-workflow
 stock-logistics-transport
 stock-logistics-warehouse
 account-closing
+bank-statement-reconcile
 server-tools
+project
