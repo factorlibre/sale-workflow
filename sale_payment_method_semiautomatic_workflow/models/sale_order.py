@@ -10,7 +10,8 @@ class SaleOrder(models.Model):
 
     manual_payment_validation = fields.Boolean(
         'Manual Payment Validation',
-        related='workflow_process_id.manual_payment_validation')
+        related='workflow_process_id.manual_payment_validation',
+        readonly=True)
 
     @api.multi
     def confirm_payments(self):
