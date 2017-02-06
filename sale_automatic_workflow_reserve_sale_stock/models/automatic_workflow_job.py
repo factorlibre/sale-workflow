@@ -31,20 +31,25 @@ class AutomaticWorkflowJob(models.Model):
         sales = sale_env.search(self._get_domain_for_stock_reservation())
         _logger.debug('Sale Orders for what the stock will be reserved: %s' %
                       sales)
+        today = datetime.now()
         for sale in sales:
+            workflow_process = sale.workflow_process_id
+            plus_days = timedelta(
+                days=workflow_process.stock_reservation_validity)
+            min_date_order = (today.date() - plus_days).strftime(
+                DEFAULT_SERVER_DATE_FORMAT)
+            # Check reservation date
+            if sale.date_order <= min_date_order:
+                continue
             ctx = dict(self.env.context)
             ctx.update({
                 'active_model': 'sale.order',
                 'active_id': sale.id,
                 'active_ids': [sale.id]
             })
-            workflow_process = sale.workflow_process_id
             with commit(self.env.cr):
                 reservation_vals = {}
                 if workflow_process.stock_reservation_validity:
-                    today = datetime.now()
-                    plus_days = timedelta(
-                        days=workflow_process.stock_reservation_validity)
                     reserve_until = today + plus_days
                     reservation_vals['date_validity'] =\
                         reserve_until.strftime(DEFAULT_SERVER_DATE_FORMAT)
