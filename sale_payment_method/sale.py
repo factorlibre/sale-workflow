@@ -107,7 +107,7 @@ class SaleOrder(models.Model):
         # reversed is cosmetic, compute returns terms in the 'wrong' order
         for date, amount in reversed(amounts):
             if not float_is_zero(amount, precision_digits=precision):
-                self._add_payment(journal, amount, date, description=self.name)
+                self._add_payment(journal, amount, date)
         return True
 
     @api.multi
@@ -132,7 +132,8 @@ class SaleOrder(models.Model):
         move_name = description or self._get_payment_move_name(journal, period)
         move_vals = self._prepare_payment_move(move_name, journal,
                                                period, date)
-        move_lines = self._prepare_payment_move_lines(move_name, journal,
+        lines_name = description or self.name
+        move_lines = self._prepare_payment_move_lines(lines_name, journal,
                                                       period, amount, date)
 
         move_vals['line_id'] = [(0, 0, line) for line in move_lines]
