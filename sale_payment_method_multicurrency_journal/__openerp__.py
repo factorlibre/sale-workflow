@@ -4,7 +4,7 @@
 
 {
     "name": "Sale Payment Method Multicurrency Journal",
-    "summary": "",
+    "summary": "Allows to assign a different journal by the order currency",
     "version": "8.0.1.0.0",
     "category": "",
     "website": "https://odoo-community.org/",
