@@ -13,8 +13,8 @@ class SaleOrder(models.Model):
         pmjl_pool = self.env['payment.method.journal.line']
         jour_line = False
         for sale in self:
-            if sale.magento_bind_ids:
-                currency = sale.magento_bind_ids[0].magento_currency_id
+            if sale.pricelist_id:
+                currency = sale.pricelist_id.currency_id
                 jour_line = pmjl_pool.search([
                     ('method', '=', sale.payment_method_id.id),
                     ('currency', '=', currency and currency.id)
