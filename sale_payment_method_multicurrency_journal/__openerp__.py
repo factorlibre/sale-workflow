@@ -21,6 +21,7 @@
     ],
     "data": [
         "views/payment_method_view.xml",
+        "security/ir.model.access.csv",
     ],
     "demo": [],
     "qweb": []
