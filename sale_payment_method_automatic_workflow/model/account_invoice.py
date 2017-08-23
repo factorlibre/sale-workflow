@@ -74,12 +74,8 @@ class AccountInvoice(models.Model):
             'total_amount': 0,
             'total_amount_currency': 0,
         }
-        product_discount = self.session.env.ref(
-            'connector_ecommerce.product_product_discount')
         for move_line in move_lines:
             if move_line[line_type] > 0 and (not move_line.reconcile_id):
-                if product_discount and move_line.product_id and move_line.product_id.id == product_discount.id:
-                    continue
                 if move_line.date > res['max_date']:
                     res['max_date'] = move_line.date
                 res['lines'] += move_line
@@ -132,7 +128,11 @@ class AccountInvoice(models.Model):
             payment_move_lines = self._get_payment()
             res_payment = self._get_sum_payment_move_line(payment_move_lines,
                                                           self.type)
-            res_invoice = self._get_sum_invoice_move_line(self.move_id.line_id,
+            inv_move_lines = self.env['account.move.line'].search([
+                ('account_id', '=', self.account_id.id),
+                ('move_id', '=', self.move_id.id)
+            ])
+            res_invoice = self._get_sum_invoice_move_line(inv_move_lines,
                                                           self.type)
             lines = res_invoice['lines'] + res_payment['lines']
 
