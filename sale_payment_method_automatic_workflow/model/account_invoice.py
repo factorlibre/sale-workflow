@@ -20,6 +20,9 @@
 ##############################################################################
 
 from openerp import models, api
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class AccountInvoice(models.Model):
@@ -71,8 +74,12 @@ class AccountInvoice(models.Model):
             'total_amount': 0,
             'total_amount_currency': 0,
         }
+        product_discount = self.session.env.ref(
+            'connector_ecommerce.product_product_discount')
         for move_line in move_lines:
-            if move_line[line_type] > 0 and not move_line.reconcile_id:
+            if move_line[line_type] > 0 and (not move_line.reconcile_id):
+                if product_discount and move_line.product_id and move_line.product_id.id == product_discount.id:
+                    continue
                 if move_line.date > res['max_date']:
                     res['max_date'] = move_line.date
                 res['lines'] += move_line
@@ -137,7 +144,6 @@ class AccountInvoice(models.Model):
                 if lines and currency.is_zero(balance):
                     lines.reconcile()
             else:
-
                 balance = (abs(res_invoice['total_amount_currency']) -
                            abs(res_payment['total_amount_currency']))
                 if lines and currency.is_zero(balance):
@@ -150,5 +156,7 @@ class AccountInvoice(models.Model):
         """ Simple method to reconcile the invoice with the payment
         generated on the sale order """
         for invoice in self:
+            _logger.info("Factura %s" % (invoice.number))
             invoice._reconcile_invoice()
+            _logger.info("Fin Factura %s" % (invoice.number))
         return True
