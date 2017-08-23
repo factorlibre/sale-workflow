@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, exceptions, fields, models
+from openerp.tools.float_utils import float_round
 
 
 class PaymentMethod(models.Model):
@@ -36,6 +37,7 @@ class PaymentMethod(models.Model):
                 if subtract < line.min_amount:
                     subtract = line.min_amount
                 res_amount -= subtract
+        res_amount = float_round(res_amount, 2)
         return res_amount, amount - res_amount
 
 
