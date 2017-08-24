@@ -156,7 +156,5 @@ class AccountInvoice(models.Model):
         """ Simple method to reconcile the invoice with the payment
         generated on the sale order """
         for invoice in self:
-            _logger.info("Factura %s" % (invoice.number))
             invoice._reconcile_invoice()
-            _logger.info("Fin Factura %s" % (invoice.number))
         return True
