@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sale-workflow (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-29 00:56+0000\n"
-"PO-Revision-Date: 2016-04-27 19:22+0000\n"
+"POT-Creation-Date: 2017-04-04 03:01+0000\n"
+"PO-Revision-Date: 2017-04-20 12:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-sale-workflow-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. module: sale_service_project
 #: view:product.price.service.wizard:sale_service_project.wiz_compute_task_price
 msgid "Accept"
-msgstr ""
+msgstr "Annehmen"
 
 #. module: sale_service_project
 #: field:project.task,all_invoiced:0
@@ -33,7 +33,7 @@ msgstr ""
 #. module: sale_service_project
 #: model:ir.model,name:sale_service_project.model_account_analytic_line
 msgid "Analytic Line"
-msgstr ""
+msgstr "Kostenposition"
 
 #. module: sale_service_project
 #: view:product.price.service.wizard:sale_service_project.wiz_compute_task_price
@@ -70,7 +70,7 @@ msgstr ""
 msgid ""
 "Contract incomplete. Please fill in the Customer and Pricelist fields for "
 "%s."
-msgstr ""
+msgstr "Vertrag unvollständig: Pflegen Sie bitte den Kunden und die Preisliste für %s."
 
 #. module: sale_service_project
 #: code:addons/sale_service_project/models/project.py:63
@@ -110,14 +110,14 @@ msgstr "Angelegt am"
 #: field:sale.order.line.task.materials,display_name:0
 #: field:sale.order.line.task.work,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: sale_service_project
 #: code:addons/sale_service_project/models/hr_timesheet_invoice.py:57
 #: code:addons/sale_service_project/models/hr_timesheet_invoice.py:75
 #, python-format
 msgid "Error!"
-msgstr ""
+msgstr "Fehler!"
 
 #. module: sale_service_project
 #: model:product.template,name:sale_service_project.product_product_filter_product_template
@@ -146,7 +146,7 @@ msgstr "ID"
 msgid ""
 "If this option is active, the user will have to enter a Start Date and an "
 "End Date on the invoice lines that have this product."
-msgstr ""
+msgstr "Ist diese Option aktiv, muss der Anwender Anfangs- und Enddatum in Rechnungspositionen dieses Produkts einpflegen."
 
 #. module: sale_service_project
 #: model:ir.model,name:sale_service_project.model_account_invoice
@@ -185,7 +185,7 @@ msgstr ""
 #: field:sale.order.line.task.materials,__last_update:0
 #: field:sale.order.line.task.work,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: sale_service_project
 #: field:product.price.service.wizard,write_uid:0
@@ -288,12 +288,12 @@ msgstr ""
 #. module: sale_service_project
 #: model:ir.model,name:sale_service_project.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Produktvorlage"
 
 #. module: sale_service_project
 #: model:ir.model,name:sale_service_project.model_project_project
 msgid "Project"
-msgstr ""
+msgstr "Projekt"
 
 #. module: sale_service_project
 #: view:project.task:sale_service_project.view_task_search_form_project_parent
@@ -342,7 +342,7 @@ msgstr ""
 #. module: sale_service_project
 #: model:ir.model,name:sale_service_project.model_project_task
 msgid "Task"
-msgstr ""
+msgstr "Aufgabe"
 
 #. module: sale_service_project
 #: view:product.task.materials:sale_service_project.product_task_materials_form_view
@@ -395,7 +395,7 @@ msgstr ""
 #. module: sale_service_project
 #: model:ir.model,name:sale_service_project.model_hr_analytic_timesheet
 msgid "Timesheet Line"
-msgstr ""
+msgstr "Zeiterfassungsposition"
 
 #. module: sale_service_project
 #: field:sale.order.line,task_work_hours:0
@@ -418,12 +418,12 @@ msgstr ""
 #: code:addons/sale_service_project/models/hr_timesheet_invoice.py:75
 #, python-format
 msgid "Trying to invoice non invoiceable line for %s."
-msgstr ""
+msgstr "Versuche nicht-abrechenbare Position %s abzurechnen."
 
 #. module: sale_service_project
 #: field:product.price.service.wizard,uom_id:0
 msgid "Unit of measure"
-msgstr ""
+msgstr "Mengeneinheit"
 
 #. module: sale_service_project
 #: view:project.task:sale_service_project.view_sale_service_inherit_form2

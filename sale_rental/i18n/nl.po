@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sale-workflow (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-29 00:56+0000\n"
+"POT-Creation-Date: 2017-07-29 07:54+0000\n"
 "PO-Revision-Date: 2015-09-03 07:10+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-sale-workflow-8-0/language/nl/)\n"
@@ -54,7 +54,7 @@ msgstr ""
 #. module: sale_rental
 #: view:create.rental.product:sale_rental.create_rental_product_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #. module: sale_rental
 #: code:addons/sale_rental/rental.py:118
@@ -65,7 +65,7 @@ msgstr ""
 #. module: sale_rental
 #: field:sale.rental,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Bedrijf"
 
 #. module: sale_rental
 #: field:create.rental.product,copy_image:0
@@ -92,12 +92,12 @@ msgstr ""
 #. module: sale_rental
 #: field:create.rental.product,create_uid:0 field:sale.rental,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: sale_rental
 #: field:create.rental.product,create_date:0 field:sale.rental,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: sale_rental
 #: field:create.rental.product,default_code:0
@@ -118,7 +118,7 @@ msgstr ""
 #. module: sale_rental
 #: field:create.rental.product,display_name:0 field:sale.rental,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Te tonen naam"
 
 #. module: sale_rental
 #: view:sale.rental:sale_rental.sale_rental_tree
@@ -140,7 +140,7 @@ msgstr ""
 #. module: sale_rental
 #: field:create.rental.product,id:0 field:sale.rental,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: sale_rental
 #: help:sale.order.line,rental_qty:0 help:sale.rental,rental_qty:0
@@ -151,17 +151,17 @@ msgstr ""
 #: field:create.rental.product,__last_update:0
 #: field:sale.rental,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: sale_rental
 #: field:create.rental.product,write_uid:0 field:sale.rental,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: sale_rental
 #: field:create.rental.product,write_date:0 field:sale.rental,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: sale_rental
 #: code:addons/sale_rental/rental.py:151
@@ -250,12 +250,12 @@ msgstr ""
 #. module: sale_rental
 #: model:ir.model,name:sale_rental.model_product_product
 msgid "Product"
-msgstr ""
+msgstr "Product"
 
 #. module: sale_rental
 #: field:create.rental.product,categ_id:0
 msgid "Product Category"
-msgstr ""
+msgstr "Productcategorie"
 
 #. module: sale_rental
 #: field:create.rental.product,name:0
@@ -478,7 +478,7 @@ msgstr ""
 #. module: sale_rental
 #: field:sale.rental,state:0
 msgid "State"
-msgstr ""
+msgstr "Staat/Provincie"
 
 #. module: sale_rental
 #: field:sale.rental,out_state:0
@@ -543,7 +543,7 @@ msgstr ""
 #. module: sale_rental
 #: view:sale.rental:sale_rental.sale_rental_form
 msgid "Total"
-msgstr ""
+msgstr "Totaal"
 
 #. module: sale_rental
 #: view:sale.rental:sale_rental.sale_rental_form

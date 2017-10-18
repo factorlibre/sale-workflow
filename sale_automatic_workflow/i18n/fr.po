@@ -3,13 +3,15 @@
 # * sale_automatic_workflow
 # 
 # Translators:
+# Pierre Verkest <pverkest@anybox.fr>, 2015
+# Quentin THEURET <quentin@theuret.net>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: sale-workflow (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-12 01:52+0000\n"
-"PO-Revision-Date: 2016-03-05 09:54+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2017-02-04 06:21+0000\n"
+"PO-Revision-Date: 2017-02-10 21:41+0000\n"
+"Last-Translator: Quentin THEURET <quentin@theuret.net>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-sale-workflow-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +43,7 @@ msgstr "Informations d'automatisation"
 msgid ""
 "Be careful, if you save the order with this setting, it could be auto-"
 "confirmed, even if you are editing it."
-msgstr ""
+msgstr "Attention, si vous enregistrez la commande avec ce paramètre, il pourrait  être confirmé automatiquement, même si vous êtes en train de l'éditer."
 
 #. module: sale_automatic_workflow
 #: selection:sale.workflow.process,order_policy:0
@@ -81,6 +83,12 @@ msgid "Deliver each product when available"
 msgstr "Livrer chaque article dès disponibilité"
 
 #. module: sale_automatic_workflow
+#: field:automatic.workflow.job,display_name:0
+#: field:sale.workflow.process,display_name:0
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: sale_automatic_workflow
 #: field:sale.workflow.process,invoice_date_is_order_date:0
 msgid "Force Invoice Date"
 msgstr "Forcer la date de facturation"
@@ -94,7 +102,7 @@ msgstr "ID"
 #: help:sale.workflow.process,warning:0
 msgid ""
 "If set, display the message when a user selects the process on a sale order"
-msgstr ""
+msgstr "Si coché, affiche un message quand un utilisateur sélectionne la validation du bon de commande."
 
 #. module: sale_automatic_workflow
 #: model:ir.model,name:sale_automatic_workflow.model_account_invoice
@@ -110,6 +118,12 @@ msgstr "Politique de facturation"
 #: field:sale.workflow.process,invoice_quantity:0
 msgid "Invoice on"
 msgstr "Facturer sur"
+
+#. module: sale_automatic_workflow
+#: field:automatic.workflow.job,__last_update:0
+#: field:sale.workflow.process,__last_update:0
+msgid "Last Modified on"
+msgstr "Dernière modification le"
 
 #. module: sale_automatic_workflow
 #: field:automatic.workflow.job,write_uid:0
@@ -183,7 +197,7 @@ msgstr "Flux automatique de vente"
 #. module: sale_automatic_workflow
 #: field:sale.workflow.process,property_journal_id:0
 msgid "Sales Journal"
-msgstr ""
+msgstr "Journal des ventes"
 
 #. module: sale_automatic_workflow
 #: model:ir.model,name:sale_automatic_workflow.model_sale_order
@@ -198,7 +212,12 @@ msgstr "Équipe commerciale"
 #. module: sale_automatic_workflow
 #: help:sale.workflow.process,property_journal_id:0
 msgid "Set default journal to use on invoice"
-msgstr ""
+msgstr "Défini le journal par défaut à utiliser sur les factures"
+
+#. module: sale_automatic_workflow
+#: field:sale.workflow.process,ship_only_available:0
+msgid "Ship only available goods"
+msgstr "Livrer uniquement les produits disponibles"
 
 #. module: sale_automatic_workflow
 #: selection:sale.workflow.process,invoice_quantity:0
@@ -229,6 +248,13 @@ msgstr "Confirmer les commandes"
 #: field:sale.workflow.process,warning:0
 msgid "Warning Message"
 msgstr "Message d'avertissement"
+
+#. module: sale_automatic_workflow
+#: help:sale.workflow.process,ship_only_available:0
+msgid ""
+"When checked, the available quantity is shipped, and if so, a backorder is "
+"created with the rest."
+msgstr "Si coché, la quantité disponible sera livrée, et si besoin, une nouvelle livraison sera générée avec la quantité restante."
 
 #. module: sale_automatic_workflow
 #: help:sale.workflow.process,invoice_date_is_order_date:0
