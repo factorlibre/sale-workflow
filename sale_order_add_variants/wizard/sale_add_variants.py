@@ -2,7 +2,9 @@
 ##############################################################################
 #
 #    Author: Hugo Santos
-#    Copyright 2015 FactorLibre
+#    Author: Rafael Valle
+#    Author: Zahra Velasco
+#    Copyright 2015-2017 FactorLibre
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -86,7 +88,7 @@ class SaleAddVariantsLine(models.TransientModel):
 
     wizard_id = fields.Many2one('sale.add.variants')
     product_id = fields.Many2one('product.product', string="Variant",
-                                 required=True, readonly=True)
+                                 required=True)
     product_uom_qty = fields.Float(
         string="Quantity", digits_compute=dp.get_precision('Product UoS'))
     product_uom = fields.Many2one('product.uom', string='Unit of Measure ',
