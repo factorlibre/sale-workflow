@@ -17,7 +17,7 @@ class AutomaticWorkflowJob(models.Model):
 
     @api.model
     def _get_domain_for_stock_reservation(self):
-        return [('state', '=', 'draft'),
+        return [('state', 'in', ['draft', 'sent']),
                 ('is_stock_reservable', '=', True),
                 ('has_stock_reservation', '=', False),
                 ('workflow_process_id.validate_order', '=', False),
