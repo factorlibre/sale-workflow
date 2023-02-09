@@ -18,10 +18,9 @@ class SaleOrder(models.Model):
 
     @api.depends(
         "state",
-        "invoice_ids",
-        "invoice_ids.amount_total_signed",
+        "order_line.qty_invoiced",
         "amount_total",
-        "invoice_ids.state",
+        "order_line.invoice_status",
     )
     def _compute_invoice_amount(self):
         for rec in self:

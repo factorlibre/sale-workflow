@@ -16,12 +16,11 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_tree" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='amount_tax']" position="after">
-                <field name="invoiced_amount" sum="Invoiced Total" optional="hide" />
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <field name="invoiced_amount" sum="Invoiced Total"/>
                 <field
                     name="uninvoiced_amount"
                     sum="Uninvoiced Total"
-                    optional="hide"
                 />
             </xpath>
         </field>

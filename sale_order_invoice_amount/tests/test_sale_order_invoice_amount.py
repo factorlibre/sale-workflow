@@ -29,7 +29,7 @@ class TestSaleOrderInvoiceAmount(common.SavepointCase):
 
         # Location
         cls.stock_warehouse = cls.env["stock.warehouse"].search(
-            [("company_id", "=", cls.env.company.id)], limit=1
+            [("company_id", "=", cls.env.user.company_id.id)], limit=1
         )
         cls.stock_location_14 = cls.env["stock.location"].create(
             {"name": "Shelf 2", "location_id": cls.stock_warehouse.lot_stock_id.id}
@@ -55,7 +55,7 @@ class TestSaleOrderInvoiceAmount(common.SavepointCase):
                 "product_uom": cls.product_1.uom_id.id,
                 "product_uom_qty": 10.0,
                 "price_unit": 10.0,
-                "tax_id": cls.tax,
+                "tax_id": [(4, cls.tax.id)],
             }
         )
         cls.order_line_2 = cls.env["sale.order.line"].create(
@@ -65,7 +65,7 @@ class TestSaleOrderInvoiceAmount(common.SavepointCase):
                 "product_uom": cls.product_2.uom_id.id,
                 "product_uom_qty": 25.0,
                 "price_unit": 4.0,
-                "tax_id": cls.tax,
+                "tax_id": [(4, cls.tax.id)],
             }
         )
         cls.order_line_3 = cls.env["sale.order.line"].create(
@@ -75,7 +75,7 @@ class TestSaleOrderInvoiceAmount(common.SavepointCase):
                 "product_uom": cls.product_3.uom_id.id,
                 "product_uom_qty": 20.0,
                 "price_unit": 5.0,
-                "tax_id": cls.tax,
+                "tax_id": [(4, cls.tax.id)],
             }
         )
 
@@ -91,7 +91,7 @@ class TestSaleOrderInvoiceAmount(common.SavepointCase):
         payment = (
             self.env["sale.advance.payment.inv"]
             .with_context(context_payment)
-            .create({"advance_payment_method": "fixed", "fixed_amount": 100})
+            .create({"advance_payment_method": "fixed", "amount": 100})
         )
 
         payment.create_invoices()
@@ -105,7 +105,7 @@ class TestSaleOrderInvoiceAmount(common.SavepointCase):
         )
 
         self.sale_order_1.action_confirm()
-        self.sale_order_1._create_invoices(final=True)
+        self.sale_order_1.action_invoice_create(final=True)
         self.assertEqual(
             self.sale_order_1.invoiced_amount,
             363.0,
