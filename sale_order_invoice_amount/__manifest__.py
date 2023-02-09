@@ -3,13 +3,14 @@
 
 {
     "name": "Sale Order Invoice Amount",
-    "version": "13.0.1.0.1",
+    "version": "11.0.1.0.1",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/sale-workflow",
     "category": "Sales",
     "license": "LGPL-3",
     "summary": "Display the invoiced and uninvoiced total in the sale order",
-    "depends": ["sale"],
+    "depends": ["sale", "stock"],
     "data": ["views/sale_order_view.xml"],
     "installable": True,
+    "pre_init_hook": "pre_init_hook",
 }
