@@ -38,5 +38,5 @@ class AutomaticWorkflowJob(models.Model):
     @api.model
     def run(self):
         res = super(AutomaticWorkflowJob, self).run()
-        self._reconcile_invoices()
+        #self._reconcile_invoices()
         return res
