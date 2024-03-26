@@ -47,9 +47,12 @@ class TestSaleOrderInvoicePolicy(common.TransactionCase):
         so_line = so.order_line[0]
         self.assertEqual(so_line.qty_to_invoice, 2)
         self.assertEqual(so_line.invoice_status, "to invoice")
+        self.assertEqual(so_line.product_id.invoice_policy, "order")
+
         so_line = so.order_line[1]
         self.assertEqual(so_line.qty_to_invoice, 3)
         self.assertEqual(so_line.invoice_status, "to invoice")
+        self.assertEqual(so_line.product_id.invoice_policy, "order")
 
     def test_sale_order_invoice_deliver(self):
         """Test invoicing based on delivered quantities"""
@@ -88,82 +91,12 @@ class TestSaleOrderInvoicePolicy(common.TransactionCase):
         so_line = so.order_line[0]
         self.assertEqual(so_line.qty_to_invoice, 2)
         self.assertEqual(so_line.invoice_status, "to invoice")
+        self.assertEqual(so_line.product_id.invoice_policy, "delivery")
 
         so_line = so.order_line[1]
         self.assertEqual(so_line.qty_to_invoice, 3)
         self.assertEqual(so_line.invoice_status, "to invoice")
-
-    def test_sale_order_invoice_policy_service1(self):
-        """
-        For this test, we check if the invoice policy is correctly updated
-        (into the product) when the type is 'service'.
-        The behaviour should be:
-        - Get the value of the context but if the type is 'service': use the
-        default_invoice_policy value from res.config.settings
-        :return: bool
-        """
-        product = self.product3.product_tmpl_id
-        product.write({"invoice_policy": "delivery"})
-        self.assertEqual(product.invoice_policy, "delivery")
-        product.with_context(invoice_policy="order")._compute_invoice_policy()
-        # Shouldn't be impacted by the context because the type is service
-        self.assertEqual(product.detailed_type, "service")
-        self.assertEqual(product.invoice_policy, "delivery")
-        return True
-
-    def test_sale_order_invoice_policy_service2(self):
-        """
-        For this test, we check if the invoice policy is correctly updated
-        (into the product) when the type is 'service'.
-        The behaviour should be:
-        - Get the value of the context but if the type is 'service': use the
-        default_invoice_policy value from res.config.settings
-        :return: bool
-        """
-        product = self.product3.product_tmpl_id
-        product.write({"invoice_policy": "order"})
-        self.assertEqual(product.invoice_policy, "order")
-        product.with_context(invoice_policy="delivery")._compute_invoice_policy()
-        # Shouldn't be impacted by the context because the type is service
-        self.assertEqual(product.detailed_type, "service")
-        self.assertEqual(product.invoice_policy, "order")
-        return True
-
-    def test_sale_order_invoice_policy_service3(self):
-        """
-        For this test, we check if the invoice policy is correctly updated
-        (into the product) when the type is 'service'.
-        The behaviour should be:
-        - Get the value of the context but if the type is 'service': use the
-        default_invoice_policy value from res.config.settings
-        :return: bool
-        """
-        product = self.product3
-        product2 = self.product2
-        products = product
-        products |= product2
-        invoice_policy = "order"
-        products.write({"invoice_policy": invoice_policy})
-        self.assertEqual(product.invoice_policy, invoice_policy)
-        self.assertEqual(product2.invoice_policy, invoice_policy)
-        new_invoice_policy = "delivery"
-        products.mapped("product_tmpl_id").with_context(
-            invoice_policy=new_invoice_policy,
-        )._compute_invoice_policy()
-        # Shouldn't be impacted by the context because the type is service
-        self.assertEqual(product.detailed_type, "service")
-        self.assertEqual(product.invoice_policy, invoice_policy)
-        # This one is not a service, so it must be impacted by the context
-        self.assertEqual(product2.invoice_policy, new_invoice_policy)
-        products.mapped("product_tmpl_id").with_context(
-            invoice_policy=invoice_policy,
-        )._compute_invoice_policy()
-        # Shouldn't be impacted by the context because the type is service
-        self.assertEqual(product.detailed_type, "service")
-        self.assertEqual(product.invoice_policy, invoice_policy)
-        # This one is not a service, so it must be impacted by the context
-        self.assertEqual(product2.invoice_policy, invoice_policy)
-        return True
+        self.assertEqual(so_line.product_id.invoice_policy, "delivery")
 
     def test_settings(self):
         # delivery policy is the default

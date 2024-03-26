@@ -7,6 +7,20 @@ from odoo import api, models
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
+    def _get_order_lines_by_invoice_policy(self, invoice_policy):
+        so_lines = self.filtered(
+            lambda x, p=invoice_policy: x.order_id.invoice_policy == p
+        ).with_prefetch()
+        return so_lines
+
+    def _set_invoice_policy_on_product_templates(self, invoice_policy):
+        product_templates = self.mapped("product_template_id").filtered(
+            lambda p: p.invoice_policy != invoice_policy
+            and p.detailed_type != "service"
+        )
+        if product_templates:
+            product_templates.write({"invoice_policy": invoice_policy})
+
     @api.depends(
         "qty_invoiced",
         "qty_delivered",
@@ -19,16 +33,8 @@ class SaleOrderLine(models.Model):
         line_by_id = {line.id: line for line in self}
         done_lines = self.env["sale.order.line"]
         for invoice_policy in invoice_policies:
-            so_lines = self.filtered(
-                lambda x, p=invoice_policy: x.order_id.invoice_policy == p
-            ).with_prefetch()
-            product_templates = so_lines.mapped("product_template_id").filtered(
-                lambda p: p.invoice_policy != invoice_policy
-            )
-            if product_templates:
-                product_templates.with_context(
-                    invoice_policy=invoice_policy
-                )._compute_invoice_policy()
+            so_lines = self._get_order_lines_by_invoice_policy(invoice_policy)
+            so_lines._set_invoice_policy_on_product_templates(invoice_policy)
             if so_lines:
                 done_lines |= so_lines
                 super(SaleOrderLine, so_lines)._compute_qty_to_invoice()
@@ -54,16 +60,8 @@ class SaleOrderLine(models.Model):
         line_by_id = {line.id: line for line in self}
         done_lines = self.env["sale.order.line"]
         for invoice_policy in invoice_policies:
-            so_lines = self.filtered(
-                lambda x, p=invoice_policy: x.order_id.invoice_policy == p
-            ).with_prefetch()
-            product_templates = so_lines.mapped("product_template_id").filtered(
-                lambda p: p.invoice_policy != invoice_policy
-            )
-            if product_templates:
-                product_templates.with_context(
-                    invoice_policy=invoice_policy
-                )._compute_invoice_policy()
+            so_lines = self._get_order_lines_by_invoice_policy(invoice_policy)
+            so_lines._set_invoice_policy_on_product_templates(invoice_policy)
             done_lines |= so_lines
             if so_lines:
                 super(SaleOrderLine, so_lines)._compute_invoice_status()
