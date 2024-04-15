@@ -26,6 +26,9 @@ class TestSaleOrderInvoicePolicy(common.TransactionCase):
 
     def test_sale_order_invoice_order(self):
         """Test invoicing based on ordered quantities"""
+        settings = self.env["res.config.settings"].create({})
+        settings.sale_invoice_policy_required = True
+        settings.execute()
         so = self.env["sale.order"].create(
             {
                 "partner_id": self.env.ref("base.res_partner_2").id,
@@ -36,6 +39,9 @@ class TestSaleOrderInvoicePolicy(common.TransactionCase):
                 "invoice_policy": "order",
             }
         )
+        so._compute_invoice_policy_required()
+        self.assertTrue(so.invoice_policy_required)
+        self.assertTrue(so.invoice_policy == "order")
 
         so.action_confirm()
 
@@ -56,6 +62,9 @@ class TestSaleOrderInvoicePolicy(common.TransactionCase):
 
     def test_sale_order_invoice_deliver(self):
         """Test invoicing based on delivered quantities"""
+        settings = self.env["res.config.settings"].create({})
+        settings.sale_invoice_policy_required = True
+        settings.execute()
         so = self.env["sale.order"].create(
             {
                 "partner_id": self.env.ref("base.res_partner_2").id,
@@ -66,6 +75,9 @@ class TestSaleOrderInvoicePolicy(common.TransactionCase):
                 ],
             }
         )
+        so._compute_invoice_policy_required()
+        self.assertTrue(so.invoice_policy_required)
+        self.assertTrue(so.invoice_policy == "delivery")
 
         so.action_confirm()
 
