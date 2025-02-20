@@ -28,29 +28,25 @@ Sale pricelist global rule
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allows configured pricelists to be applied to a sales order
-by considering cumulative quantities across all lines.
+This module allows configured pricelists to be applied to a sales order by considering cumulative quantities across all lines.
 
 **Global by Product Template**
 
-If a pricelist rule has a min_quantity = 15, and a sales order contains:
+If a pricelist rule has a `min_quantity = 15`, and a sales order contains:
 
 - Line 1: Variant 1, quantity = 8
 - Line 2: Variant 2, quantity = 8
 
 **Global by Product Category**
 
-Similarly, if a pricelist rule has a min_quantity = 20 for products
-within a category, and a sales order includes:
+Similarly, if a pricelist rule has a `min_quantity = 20` for products within a category, and a sales order includes:
 
 - Line 1: Product 1, quantity = 10
 - Line 2: Product 2, quantity = 10
 
-In standard Odoo, pricelist rules would not apply since no single line
-meets the minimum quantity. With this module, however, cumulative
-quantities across lines allow the pricelist rule to apply, as they meet
-the minimum threshold (16 in the product template example and 20 in the
-product category example).
+In standard Odoo, pricelist rules would not apply since no single line meets the minimum quantity. 
+With this module, however, cumulative quantities across lines allow the pricelist rule to apply, 
+as they meet the minimum threshold (16 in the product template example and 20 in the product category example).
 
 **Table of contents**
 
@@ -60,28 +56,23 @@ product category example).
 Configuration
 =============
 
-- Go to Sales -> Products -> Pricelist.
-- Create a new Pricelist and add at least one line with the Apply On
-  option set to Global - Product template or Global - Product category
+- Go to `Sales` -> `Products` -> `Pricelist`.
+- Create a new Pricelist and add at least one line with the `Apply On` option set to `Global - Product template` or `Global - Product category`
 - Choose the specific product template or category for the rule.
-- Set the computation mode and save
+- Set the `computation mode` and save
 
 Usage
 =====
 
-- Go to Sales -> Orders -> Quotations.
+- Go to `Sales` -> `Orders` -> `Quotations`.
 - Create a new record and fill the required fields.
-- Choose a Pricelist that has a global rule configured (either by
-  Category or Product).
-- Click the **Recompute pricelist global** button to update prices
-  according to the specified pricelist rules.
+- Choose a `Pricelist` that has a global rule configured (either by Category or Product).
+- Click the **Recompute pricelist global** button to update prices according to the specified pricelist rules.
 
 Known issues / Roadmap
 ======================
 
-- Implement automatic application of the pricelist whenever changes are
-  made to order lines (such as prices, quantities, etc.) or to the
-  pricelist itself, eliminating the need for manual button clicks.
+- Implement automatic application of the pricelist whenever changes are made to order lines (such as prices, quantities, etc.) or to the pricelist itself, eliminating the need for manual button clicks.
 
 Bug Tracker
 ===========
@@ -97,20 +88,20 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * Tecnativa
 
 Contributors
-------------
+~~~~~~~~~~~~
 
-- `Tecnativa <https://www.tecnativa.com>`__
+* `Tecnativa <https://www.tecnativa.com>`_
 
-  - Pedro M. Baeza
-  - Carlos López
+  * Pedro M. Baeza
+  * Carlos López
 
 Maintainers
------------
+~~~~~~~~~~~
 
 This module is maintained by the OCA.
 
