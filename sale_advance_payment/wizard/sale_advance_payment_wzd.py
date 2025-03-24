@@ -155,7 +155,8 @@ class AccountVoucherWizard(models.TransientModel):
             payment_vals = self._prepare_payment_vals(sale)
             payment = payment_obj.create(payment_vals)
             sale.account_payment_ids |= payment
-            payment.action_post()
+            if sale.state == "sale":
+                payment.action_post()
 
         return {
             "type": "ir.actions.act_window_close",

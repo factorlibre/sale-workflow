@@ -183,7 +183,7 @@ class TestSaleAdvancePayment(common.TransactionCase):
         )
         advance_payment_1.make_advance_payment()
 
-        self.assertEqual(self.sale_order_1.amount_residual, 3480)
+        self.assertEqual(self.sale_order_1.amount_residual, 3600)
 
         # Create Advance Payment 2 - USD - cash
         advance_payment_2 = (
@@ -200,10 +200,11 @@ class TestSaleAdvancePayment(common.TransactionCase):
         )
         advance_payment_2.make_advance_payment()
 
-        self.assertEqual(self.sale_order_1.amount_residual, 3280)
+        self.assertEqual(self.sale_order_1.amount_residual, 3600)
 
         # Confirm Sale Order
         self.sale_order_1.action_confirm()
+        self.assertEqual(self.sale_order_1.amount_residual, 3280)
 
         # Create Advance Payment 3 - EUR - cash
         advance_payment_3 = (
@@ -298,7 +299,7 @@ class TestSaleAdvancePayment(common.TransactionCase):
         advance_payment_2.make_advance_payment()
         pre_payment = self.sale_order_1.account_payment_ids
         self.assertEqual(len(pre_payment), 1)
-        self.assertEqual(self.sale_order_1.amount_residual, 3400)
+        self.assertEqual(self.sale_order_1.amount_residual, 3600)
         # generate invoice, pay invoice, check amount residual.
         self.sale_order_1.action_confirm()
         self.assertEqual(self.sale_order_1.invoice_status, "to invoice")
@@ -350,9 +351,10 @@ class TestSaleAdvancePayment(common.TransactionCase):
         advance_payment_2.make_advance_payment()
         pre_payment = self.sale_order_1.account_payment_ids
         self.assertEqual(len(pre_payment), 1)
-        self.assertEqual(self.sale_order_1.amount_residual, 1600)
+        self.assertEqual(self.sale_order_1.amount_residual, 3600)
         # generate a partial invoice, reconcile with pre payment, check amount residual.
         self.sale_order_1.action_confirm()
+        self.assertEqual(self.sale_order_1.amount_residual, 1600)
         self.assertEqual(self.sale_order_1.invoice_status, "to invoice")
         # Adjust invoice_policy method to then do a partial invoice with a total amount
         # smaller than the pre-payment.
@@ -407,7 +409,7 @@ class TestSaleAdvancePayment(common.TransactionCase):
         )
         advance_payment_1.make_advance_payment()
 
-        self.assertEqual(self.sale_order_1.amount_residual, 3480)
+        self.assertEqual(self.sale_order_1.amount_residual, 3600)
 
         # Create Advance Payment 2 - USD - cash
         advance_payment_2 = (
@@ -424,10 +426,11 @@ class TestSaleAdvancePayment(common.TransactionCase):
         )
         advance_payment_2.make_advance_payment()
 
-        self.assertEqual(self.sale_order_1.amount_residual, 3280)
+        self.assertEqual(self.sale_order_1.amount_residual, 3600)
 
         # Confirm Sale Order
         self.sale_order_1.action_confirm()
+        self.assertEqual(self.sale_order_1.amount_residual, 3280)
 
         # Create Advance Payment 3 - EUR - cash
         advance_payment_3 = (

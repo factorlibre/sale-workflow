@@ -96,3 +96,13 @@ class SaleOrder(models.Model):
             order.payment_line_ids = mls
             order.amount_residual = amount_residual
             order.advance_payment_status = payment_state
+
+    def action_confirm(self):
+        res = super().action_confirm()
+        for order in self:
+            payment_ids = order.mapped("account_payment_ids").filtered(
+                lambda x: x.state == "draft"
+            )
+            if payment_ids:
+                payment_ids.action_post()
+        return res
